@@ -1,5 +1,4 @@
-const ClientError = require("../../exceptions/ClientError");
-
+/* eslint-disable no-underscore-dangle */
 class AuthenticationsHandler {
   constructor(authenticationsService, usersService, tokenManager, validator) {
     this._authenticationsService = authenticationsService;
@@ -9,8 +8,7 @@ class AuthenticationsHandler {
 
     this.postAuthenticationHandler = this.postAuthenticationHandler.bind(this);
     this.putAuthenticationHandler = this.putAuthenticationHandler.bind(this);
-    this.deleteAuthenticationHandler =
-      this.deleteAuthenticationHandler.bind(this);
+    this.deleteAuthenticationHandler = this.deleteAuthenticationHandler.bind(this);
   }
 
   async postAuthenticationHandler(request, h) {
@@ -19,7 +17,7 @@ class AuthenticationsHandler {
     const { username, password } = request.payload;
     const id = await this._usersService.verifyUserCredential(
       username,
-      password
+      password,
     );
 
     const accessToken = this._tokenManager.generateAccessToken({ id });
@@ -28,8 +26,8 @@ class AuthenticationsHandler {
     await this._authenticationsService.addRefreshToken(refreshToken);
 
     const response = h.response({
-      status: "success",
-      message: "Authentication berhasil ditambahkan",
+      status: 'success',
+      message: 'Authentication berhasil ditambahkan',
       data: {
         accessToken,
         refreshToken,
@@ -39,7 +37,7 @@ class AuthenticationsHandler {
     return response;
   }
 
-  async putAuthenticationHandler(request, h) {
+  async putAuthenticationHandler(request) {
     this._validator.validatePutAuthenticationPayload(request.payload);
 
     const { refreshToken } = request.payload;
@@ -48,15 +46,15 @@ class AuthenticationsHandler {
 
     const accessToken = this._tokenManager.generateAccessToken({ id });
     return {
-      status: "success",
-      message: "Access Token berhasil diperbarui",
+      status: 'success',
+      message: 'Access Token berhasil diperbarui',
       data: {
         accessToken,
       },
     };
   }
 
-  async deleteAuthenticationHandler(request, h) {
+  async deleteAuthenticationHandler(request) {
     this._validator.validateDeleteAuthenticationPayload(request.payload);
 
     const { refreshToken } = request.payload;
@@ -64,8 +62,8 @@ class AuthenticationsHandler {
     await this._authenticationsService.deleteRefreshToken(refreshToken);
 
     return {
-      status: "success",
-      message: "Refresh token berhasil dihapus",
+      status: 'success',
+      message: 'Refresh token berhasil dihapus',
     };
   }
 }
