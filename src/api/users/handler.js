@@ -1,4 +1,4 @@
-const ClientError = require('../../exceptions/ClientError');
+const ClientError = require("../../exceptions/ClientError");
 
 class UsersHandler {
   constructor(service, validator) {
@@ -13,11 +13,15 @@ class UsersHandler {
     this._validator.validateUserPayload(request.payload);
     const { username, password, fullname } = request.payload;
 
-    const userId = await this._service.addUser({ username, password, fullname });
+    const userId = await this._service.addUser({
+      username,
+      password,
+      fullname,
+    });
 
     const response = h.response({
-      status: 'success',
-      message: 'User berhasil ditambahkan',
+      status: "success",
+      message: "User berhasil ditambahkan",
       data: {
         userId,
       },
@@ -32,7 +36,7 @@ class UsersHandler {
     const user = await this._service.getUserById(id);
 
     return {
-      status: 'success',
+      status: "success",
       data: {
         user,
       },
