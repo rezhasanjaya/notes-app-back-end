@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require('joi');
 
 const NotePayloadSchema = Joi.object({
   title: Joi.string().required(),
@@ -7,3 +7,4 @@ const NotePayloadSchema = Joi.object({
 });
 
 module.exports = { NotePayloadSchema };
+

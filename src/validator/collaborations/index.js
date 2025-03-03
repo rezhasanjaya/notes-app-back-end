@@ -12,3 +12,4 @@ const CollaborationsValidator = {
 };
 
 module.exports = CollaborationsValidator;
+

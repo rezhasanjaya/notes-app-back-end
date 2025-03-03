@@ -6,3 +6,4 @@ const CollaborationPayloadSchema = Joi.object({
 });
 
 module.exports = { CollaborationPayloadSchema };
+

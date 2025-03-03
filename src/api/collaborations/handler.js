@@ -1,6 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-const ClientError = require("../../exceptions/ClientError");
-
 class CollaborationsHandler {
   constructor(collaborationsService, notesService, validator) {
     this._collaborationsService = collaborationsService;
@@ -8,8 +6,7 @@ class CollaborationsHandler {
     this._validator = validator;
 
     this.postCollaborationHandler = this.postCollaborationHandler.bind(this);
-    this.deleteCollaborationHandler =
-      this.deleteCollaborationHandler.bind(this);
+    this.deleteCollaborationHandler = this.deleteCollaborationHandler.bind(this);
   }
 
   async postCollaborationHandler(request, h) {
@@ -24,8 +21,8 @@ class CollaborationsHandler {
     );
 
     const response = h.response({
-      status: "success",
-      message: "Kolaborasi berhasil ditambahkan",
+      status: 'success',
+      message: 'Kolaborasi berhasil ditambahkan',
       data: {
         collaborationId,
       },
@@ -43,10 +40,11 @@ class CollaborationsHandler {
     await this._collaborationsService.deleteCollaboration(noteId, userId);
 
     return {
-      status: "success",
-      message: "Kolaborasi berhasil dihapus",
+      status: 'success',
+      message: 'Kolaborasi berhasil dihapus',
     };
   }
 }
 
 module.exports = CollaborationsHandler;
+

@@ -27,3 +27,4 @@ const AuthenticationsValidator = {
 };
 
 module.exports = AuthenticationsValidator;
+
